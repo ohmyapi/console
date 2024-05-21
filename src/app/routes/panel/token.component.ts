@@ -21,7 +21,7 @@ import { TokenFormDialogComponent } from '../../dialogs/token-form-dialog.compon
         </div>
       } @else {
         <div class="flex flex-col items-center justify-center gap-4 w-full">
-          <div class="flex flex-col sm:flex-nowrap sm:items-center sm:justify-between gap-2 w-full rounded-2xl p-6 bg-gradient-to-tl from-green-700 to-green-500 text-white">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 w-full rounded-2xl p-6 bg-gradient-to-tl from-green-700 to-green-500 text-white">
             <span>شما {{ userService.tokens }} کلید دارید</span>
 
             <button (click)="openTokenFormDialog()" class="btn btn-sm btn-outline border-white text-white mt-4 sm:mt-0">
