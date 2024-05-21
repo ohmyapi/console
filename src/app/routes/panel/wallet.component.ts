@@ -62,6 +62,20 @@ import { WalletTransactionDialogComponent } from '../../dialogs/wallet-transacti
             </tbody>
           </table>
         </div>
+
+        @if(page <= last) {
+          <div class="flex flex-nowrap items-center justify-center">
+            <button (click)="next()" class="btn btn-sm btn-ghost" [class.btn-disabled]="loading">
+              @if(loading) {
+                <span class="loading loading-spinner loading-xs"></span>
+              } @else { 
+                <span>
+                  تراکنش های بیشتر
+                </span>
+              }
+            </button>
+          </div>
+        }
       }
     }
   `,
@@ -75,7 +89,7 @@ export class WalletComponent {
   }
 
   public page: number = 1;
-  public limit: number = 100;
+  public limit: number = 10;
   public last: number = 1;
   public total: number = 0;
 
@@ -108,6 +122,10 @@ export class WalletComponent {
     return moment(value).locale(this.i18nService.languageCurrent!).fromNow();
   }
 
+  public next() {
+    this.fetch();
+  }
+
   private async fetch() {
     if (this.loading) return;
     if (this.page > this.last) return;
@@ -129,7 +147,11 @@ export class WalletComponent {
         this.last = result.meta!.last!;
         this.total = result.meta!.total!;
 
-        this.transactions = result.data;
+        if (this.transactions == undefined) {
+          this.transactions = [];
+        }
+
+        this.transactions = this.transactions.concat(result.data);
       }
 
       this.loading = false;
