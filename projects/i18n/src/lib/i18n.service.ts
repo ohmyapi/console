@@ -106,7 +106,7 @@ export class I18nService {
     this.document.head.appendChild(link);
 
     const style = this.document.createElement('style');
-    style.innerText = `*:not(.ti) {
+    style.innerText = `*:not(.material-icons-round) {
       font-family: "${font}", sans-serif;
     }`;
     style.id = 'i18n-font';

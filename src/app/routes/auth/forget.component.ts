@@ -11,7 +11,7 @@ import { I18nModule } from '../../../../projects/i18n/src/public-api';
 
     <form class="flex flex-col gap-2 w-[300px]">
       <label dir="ltr" class="input input-bordered focus-within:input-primary flex items-center gap-2">
-        <i class="ti ti-mail text-gray-500"></i>
+        <i class="material-icons-round text-gray-500">password</i>
         <input type="email" name="ohmyapi-email" placeholder="{{ 'input:email-forget' | i18n }}" class="grow placeholder:text-end placeholder:text-gray-500"/>
       </label>
     </form>

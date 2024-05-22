@@ -16,13 +16,13 @@ import { I18nModule } from '../../../../projects/i18n/src/public-api';
     }
 
     @if(status == 'success') {
-      <i class="ti ti-check text-success !w-32 !h-32 !text-[8rem] mb-8"></i>
+      <i class="material-icons-round text-success !w-32 !h-32 !text-[8rem] mb-8">done</i>
 
       <strong>{{ 'text:wallet-callback:success' | i18n }}</strong>
     }
 
     @if(status == 'failed') {
-      <i class="ti ti-x text-error !w-32 !h-32 !text-[8rem] mb-8"></i>
+      <i class="material-icons-round text-error !w-32 !h-32 !text-[8rem] mb-8">close</i>
 
       <strong>{{ 'text:wallet-callback:failed' | i18n }}</strong>
     }

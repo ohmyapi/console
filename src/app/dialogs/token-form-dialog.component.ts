@@ -27,7 +27,7 @@ import { ToastService } from '../../../projects/sdk/src/public-api';
       <section class="flex flex-col items-center gap-4 p-10">
         <label dir="ltr" class="input input-bordered flex items-center gap-2 w-full focus-within:border-green-500 focus-within:outline-green-500">
           <button (click)="copyToken()" class="btn btn-sm btn-square btn-ghost tooltip tooltip-bottom" [attr.data-tip]="'text:token-form-dialog:copy-to-clipboard' | i18n">
-            <i class="ti ti-clipboard"></i>
+            <i class="material-icons-round">content_copy</i>
           </button>
 
           <input readonly type="string" [value]="data['token']" name="ohmyapi-token" placeholder="{{ 'input:token' | i18n }}" class="grow placeholder:text-gray-500"/>

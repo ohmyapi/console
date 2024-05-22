@@ -64,7 +64,7 @@ import { AppService } from '../../../../projects/sdk/src/lib/app.service';
             </label>
 
             <label dir="ltr" class="input input-bordered focus-within:input-primary flex items-center gap-2 tooltip-error sm:tooltip-left" [attr.data-tip]="password.field('password').message" [ngClass]="{'tooltip tooltip-open input-error': password.field('password').invalid}">
-              <i (click)="visablePassword = !visablePassword" class="ti ti-{{visablePassword ? 'eye-off' : 'eye'}} text-gray-500"></i>
+              <i (click)="visablePassword = !visablePassword" class="material-icons-round text-gray-500">{{ visablePassword ? 'visibility_off' : 'visibility'}}</i>
               <input formControlName="password" type="{{ visablePassword ? 'text' : 'password' }}" name="ohmyapi-password" placeholder="{{ 'input:password' | i18n }}" class="grow placeholder:text-end placeholder:text-gray-500"/>
             </label>
           </div>
@@ -75,7 +75,7 @@ import { AppService } from '../../../../projects/sdk/src/lib/app.service';
             </label>
 
             <label dir="ltr" class="input input-bordered focus-within:input-primary flex items-center gap-2 tooltip-error sm:tooltip-left" [attr.data-tip]="password.field('verify-password').message" [ngClass]="{'tooltip tooltip-open input-error': password.field('verify-password').invalid}">
-              <i (click)="visablePassword = !visablePassword" class="ti ti-{{visablePassword ? 'eye-off' : 'eye'}} text-gray-500"></i>
+              <i (click)="visablePassword = !visablePassword" class="material-icons-round text-gray-500">{{ visablePassword ? 'visibility_off' : 'visibility'}}</i>
               <input formControlName="verify-password" type="{{ visablePassword ? 'text' : 'password' }}" name="ohmyapi-verify-password" placeholder="{{ 'input:verify-password' | i18n }}" class="grow placeholder:text-end placeholder:text-gray-500"/>
             </label>
           </div>
@@ -103,7 +103,7 @@ import { AppService } from '../../../../projects/sdk/src/lib/app.service';
         <span class="block text-sm text-gray-500 mt-8 mb-4">{{ 'text:your-account' | i18n }}</span>
 
         <div class="flex flex-nowrap items-center gap-2">
-          <i class="ti ti-logout text-error"></i>
+          <i class="material-icons-round">logout</i>
 
           <span>{{ 'text:logout' | i18n }}</span>
 

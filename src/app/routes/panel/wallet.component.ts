@@ -23,7 +23,7 @@ import { WalletTransactionDialogComponent } from '../../dialogs/wallet-transacti
       </div>
 
       <button (click)="openDepositDialog()" class="btn btn-sm btn-ghost border border-white/50 text-white hover:bg-white hover:text-amber-500">
-        <i class="ti ti-plus"></i>
+        <i class="material-icons-round">add</i>
 
         <span>
           {{ 'text:deposit' | i18n }}

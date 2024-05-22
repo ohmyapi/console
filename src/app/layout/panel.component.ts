@@ -13,7 +13,7 @@ import { AppService } from '../../../projects/sdk/src/lib/app.service';
     <header class="flex flex-nowrap items-center w-full sm:w-128 min-h-16 sm:min-h-32 px-4 sm:p-0 mx-auto mb-10 relative">
       @if(backable && userService.profile) {
         <a routerLink="/-/dashboard" [replaceUrl]="true" class="btn btn-sm btn-ghost">
-          <i class="ti ti-arrow-right"></i>
+          <i class="material-icons-round">arrow_forward</i>
           <span> {{ 'text:back' | i18n }} </span>
         </a>
       }

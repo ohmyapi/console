@@ -19,12 +19,12 @@ import { ApiService } from '../../../../projects/api/src/public-api';
       </label>
 
       <label dir="ltr" class="input input-bordered focus-within:input-primary flex items-center gap-2 tooltip-error sm:tooltip-left" [attr.data-tip]="form.field('email').message" [ngClass]="{'tooltip tooltip-open input-error': form.field('email').invalid}">
-        <i class="ti ti-mail text-gray-500"></i>
+        <i class="material-icons-round text-gray-500">email</i>
         <input formControlName="email" type="email" name="ohmyapi-email" placeholder="{{ 'input:email-register' | i18n }}" class="grow placeholder:text-end placeholder:text-gray-500"/>
       </label>
     
       <label dir="ltr" class="input input-bordered focus-within:input-primary flex items-center gap-2 tooltip-error sm:tooltip-left" [attr.data-tip]="form.field('password').message" [ngClass]="{'tooltip tooltip-open input-error': form.field('password').invalid}">
-        <i class="ti ti-lock text-gray-500"></i>
+        <i class="material-icons-round text-gray-500">password</i>
         <input formControlName="password" type="password" name="ohmyapi-password" placeholder="{{ 'input:password-register' | i18n }}" class="grow placeholder:text-end placeholder:text-gray-500"/>
       </label>
     </form>
@@ -82,8 +82,8 @@ export class AuthRegisterComponent {
           i18n: result['i18n'],
         });
 
-      } catch (error: any) {        
-        if (error?.error?.i18n) {          
+      } catch (error: any) {
+        if (error?.error?.i18n) {
           this.toastSerivce.make({
             i18n: error.error['i18n'],
           });

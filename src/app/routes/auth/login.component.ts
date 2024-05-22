@@ -16,12 +16,12 @@ import { Form, ToastService } from '../../../../projects/sdk/src/public-api';
 
     <form [formGroup]="form.group" (submit)="submit()" class="flex flex-col gap-2 w-[300px]">
       <label dir="ltr" class="input input-bordered focus-within:input-primary flex items-center gap-2 tooltip-error sm:tooltip-left" [attr.data-tip]="form.field('email').message" [ngClass]="{'tooltip tooltip-open input-error': form.field('email').invalid}">
-        <i class="ti ti-mail text-gray-500"></i>
+        <i class="material-icons-round text-gray-500">email</i>
         <input formControlName="email" type="email" name="ohmyapi-email" placeholder="{{ 'input:email-login' | i18n }}" class="grow placeholder:text-end placeholder:text-gray-500"/>
       </label>
     
       <label dir="ltr" class="input input-bordered focus-within:input-primary flex items-center gap-2 tooltip-error sm:tooltip-left" [attr.data-tip]="form.field('password').message" [ngClass]="{'tooltip tooltip-open input-error': form.field('password').invalid}">
-        <i class="ti ti-lock text-gray-500"></i>
+      <i class="material-icons-round text-gray-500">password</i>
         <input formControlName="password" type="password" name="ohmyapi-password" placeholder="{{ 'input:password-login' | i18n }}" class="grow placeholder:text-end placeholder:text-gray-500"/>
       </label>
 
