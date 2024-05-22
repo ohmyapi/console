@@ -114,5 +114,7 @@
     "text:wallet-transaction-dialog:status": "وضعیت",
     "text:logining": "داریم می بینیم تو کی هستی",
     "server:text:LOGGEDIN_SUCCESSFULLY": "ورود خوبی داشتید",
-    "server:text:OK": "انجام شد"
+    "server:text:OK": "انجام شد",
+    "button:more-transactions": "تراکنش های بیشتر",
+    "button:more-tokens": "توکن های بیشتر"
 }

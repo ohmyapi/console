@@ -70,12 +70,14 @@ import { WalletTransactionDialogComponent } from '../../dialogs/wallet-transacti
                 <span class="loading loading-spinner loading-xs"></span>
               } @else { 
                 <span>
-                  تراکنش های بیشتر
+                  {{ 'button:more-transactions' | i18n }}
                 </span>
               }
             </button>
           </div>
         }
+
+        <br />
       }
     }
   `,

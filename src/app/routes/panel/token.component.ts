@@ -54,6 +54,22 @@ import { TokenFormDialogComponent } from '../../dialogs/token-form-dialog.compon
               </tbody>
             </table>
           </div>
+
+          @if(page <= last) {
+          <div class="flex flex-nowrap items-center justify-center">
+            <button (click)="next()" class="btn btn-sm btn-ghost" [class.btn-disabled]="loading">
+              @if(loading) {
+                <span class="loading loading-spinner loading-xs"></span>
+              } @else { 
+                <span>
+                  {{ 'button:more-tokens' | i18n }}
+                </span>
+              }
+            </button>
+          </div>
+        }
+
+          <br />
         }
       }
   `,
@@ -94,6 +110,10 @@ export class TokenComponent {
 
   public formatToken(token: string) {
     return token.slice(0, 4) + '***.*******.***' + token.slice(token.length - 4, token.length);
+  }
+
+  public next() {
+    this.fetch();
   }
 
   private async fetch() {
