@@ -107,6 +107,7 @@ export class WalletComponent {
   ) { }
 
   ngOnInit() {
+    this.userService.loadWallet();
     this.fetch();
   }
 
