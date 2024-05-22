@@ -138,6 +138,8 @@ export class TokenComponent {
         this.last = result.meta!.last!;
         this.total = result.meta!.total!;
 
+        this.userService.tokens = this.total;
+
         this.tokens = result.data;
       }
 
