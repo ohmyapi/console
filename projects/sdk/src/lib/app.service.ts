@@ -1,5 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
+import { SwUpdate } from '@angular/service-worker';
+import { filter } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +35,24 @@ export class AppService {
   constructor(
     @Inject(DOCUMENT)
     private document: Document,
+    private swUpdate: SwUpdate
   ) { }
 
   public toggleTheme() {
     this.theme = this._theme == 'light' ? 'dark' : 'light';
+  }
+
+  public get onUpdateAvailable() {
+    return this.swUpdate.versionUpdates.pipe(filter((event) => {
+      if (event.type == 'VERSION_DETECTED') return true;
+      return false;
+    }));
+  }
+
+  public update() {
+    this.swUpdate.activateUpdate().then(() => {
+      window.location.reload();
+    });
   }
 
   private changeBodyAttrabiuteTheme() {

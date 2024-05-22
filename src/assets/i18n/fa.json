@@ -117,5 +117,7 @@
     "server:text:OK": "انجام شد",
     "server:text:TRANSACTION_CREATED": "تراکنش ایجاد شد",
     "button:more-transactions": "تراکنش های بیشتر",
-    "button:more-tokens": "توکن های بیشتر"
+    "button:more-tokens": "توکن های بیشتر",
+    "text:update-available": "یه بروزرسانی جدید رسید",
+    "button:update": "بروز کن"
 }
