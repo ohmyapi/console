@@ -22,6 +22,10 @@
     height: inherit !important;
   }
 
+  .h-device-screen {
+    height: 100dvh;
+  }
+
   .z-100 {
     z-index: 100;
   }

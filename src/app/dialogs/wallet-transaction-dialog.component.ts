@@ -79,7 +79,7 @@ import moment from 'jalali-moment';
     </section>
   `,
   host: {
-    class: 'flex flex-col bg-base-100 shadow-xl text-base-content sm:rounded-box w-screen h-screen sm:h-fit sm:w-128 overflow-hidden'
+    class: 'flex flex-col bg-base-100 shadow-xl text-base-content sm:rounded-box w-screen h-device-screen sm:h-fit sm:w-128 overflow-hidden'
   }
 })
 export class WalletTransactionDialogComponent {
