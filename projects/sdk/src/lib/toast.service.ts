@@ -14,7 +14,7 @@ export class ToastService {
     const subject = new Subject();
     const alert = document.createElement('div');
     alert.className =
-      'alert justify-center bg-natural text-natural-content w-full md:min-w-[300px] md:w-fit min-h-[56px] dark:shadow-lg';
+      'alert justify-center bg-natural text-natural-content w-full md:min-w-[300px] md:w-fit min-h-[56px] shadow-lg';
 
     const div = document.createElement('div');
     div.className = 'flex flex-nowrap items-center justify-between w-full h-full';
@@ -65,7 +65,7 @@ export class ToastService {
     const div = document.createElement('div');
     div.id = 'ohmyapi-toast-container';
     div.className =
-      'toast toast-bottom items-center justify-center z-[9999] -md:mb-14 -md:left-0 -md:right-0 md:!right-[unset]';
+      'toast toast-top md:toast-bottom items-center justify-center z-[9999] left-0 right-0 md:right-[unset] md:left-[unset]';
 
     document.body.appendChild(div);
 
