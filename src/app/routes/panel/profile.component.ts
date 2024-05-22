@@ -16,8 +16,8 @@ import { AppService } from '../../../../projects/sdk/src/lib/app.service';
     <div role="tablist" class="tabs tabs-lifted sm:shadow-2xl sm:rounded-box sm:bg-base-100/20 sm:w-128">
       <input type="radio" name="tabs" role="tab" class="tab !w-28" [attr.aria-label]="'tab:profile' | i18n" checked />
 
-      <div role="tabpanel" class="tab-content bg-base-100 sm:border-base-300 sm:rounded-box p-6 sm:w-128">
-        <form [formGroup]="profile.group" class="flex flex-col gap-2 w-full">
+      <div role="tabpanel" class="tab-content bg-base-100 sm:rounded-box p-6 h-[calc(100dvh-135px)] sm:w-128 sm:h-fit">
+        <form [formGroup]="profile.group" class="flex flex-col gap-2 w-full h-full">
           <div class="form-control">
             <label class="label">
             <span class="label-text">{{ 'label:firstname' | i18n }}</span>
@@ -48,7 +48,7 @@ import { AppService } from '../../../../projects/sdk/src/lib/app.service';
             </label>
           </div>
 
-          <button [disabled]="profile.disabled" (click)="submitProfile()" class="btn btn-primary mt-10">
+          <button [disabled]="profile.disabled" (click)="submitProfile()" class="btn btn-primary mt-auto sm:mt-10">
             {{ 'button:change-profile' | i18n }}
           </button>
         </form>
@@ -56,8 +56,8 @@ import { AppService } from '../../../../projects/sdk/src/lib/app.service';
 
       <input type="radio" name="tabs" role="tab" class="tab !w-28" [attr.aria-label]="'tab:password' | i18n" />
 
-      <div role="tabpanel" class="tab-content bg-base-100 sm:border-base-300 sm:rounded-box p-6 sm:w-128">
-        <form [formGroup]="password.group" class="flex flex-col gap-2 w-full">
+      <div role="tabpanel" class="tab-content bg-base-100 sm:rounded-box p-6 h-[calc(100dvh-135px)] sm:w-128 sm:h-fit">
+        <form [formGroup]="password.group" class="flex flex-col gap-2 w-full h-full">
           <div class="form-control">
             <label class="label">
             <span class="label-text">{{ 'label:password' | i18n }}</span>
@@ -80,7 +80,7 @@ import { AppService } from '../../../../projects/sdk/src/lib/app.service';
             </label>
           </div>
 
-          <button [disabled]="password.disabled" (click)="submitPassword()" class="btn btn-primary mt-10">
+          <button [disabled]="password.disabled" (click)="submitPassword()" class="btn btn-primary mt-auto sm:mt-10">
             {{ 'button:change-password' | i18n }}
           </button>
         </form>
@@ -88,7 +88,7 @@ import { AppService } from '../../../../projects/sdk/src/lib/app.service';
 
       <input type="radio" name="tabs" role="tab" class="tab !w-28" [attr.aria-label]="'tab:settings' | i18n" />
       
-      <div role="tabpanel" class="tab-content bg-base-100 sm:border-base-300 sm:rounded-box p-6 sm:w-128">
+      <div role="tabpanel" class="tab-content bg-base-100 sm:rounded-box p-6 h-[calc(100dvh-135px)] sm:w-128 sm:h-fit">
         
         <span class="block text-sm text-gray-500 mb-4">{{ 'text:your-desktop' | i18n }}</span>
         

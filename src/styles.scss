@@ -10,6 +10,10 @@
   justify-content: center;
 }
 
+.tabs-lifted > .tab {
+  border: none;
+}
+
 @layer components {
   .h-inherit {
     height: inherit !important;
