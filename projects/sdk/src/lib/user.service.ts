@@ -20,33 +20,9 @@ export class UserService {
 
   public whoami() {
     return Promise.all([
-      this.apiService.call({
-        action: 'api.v1.ohmyapi.user.me',
-        auth: true
-      }).then((result) => {
-        if (result['status']) {
-          this.profile = result['data'];
-        }
-      }),
-      this.apiService.call({
-        action: 'api.v1.ohmyapi.wallet.mine',
-        auth: true
-      }).then((result) => {
-        if (result['status']) {
-          this.wallet = result['data'];
-        }
-      }),
-      this.apiService.call({
-        action: 'api.v1.ohmyapi.token.list',
-        auth: true,
-        data: {
-          limit: 1
-        }
-      }).then((result) => {
-        if (result['status']) {
-          this.tokens = result.meta!.total ?? 0;
-        }
-      }),
+      this.loadProfile(),
+      this.loadWallet(),
+      this.loadTokens(),
     ])
   }
 
@@ -54,5 +30,41 @@ export class UserService {
     this.apiService.token = undefined;
     this.profile = undefined;
     this.wallet = undefined;
+  }
+
+  public loadProfile() {
+    return this.apiService.call({
+      action: 'api.v1.ohmyapi.user.me',
+      auth: true
+    }).then((result) => {
+      if (result['status']) {
+        this.profile = result['data'];
+      }
+    });
+  }
+
+  public loadWallet() {
+    return this.apiService.call({
+      action: 'api.v1.ohmyapi.wallet.mine',
+      auth: true
+    }).then((result) => {
+      if (result['status']) {
+        this.wallet = result['data'];
+      }
+    });
+  }
+
+  public loadTokens() {
+    return this.apiService.call({
+      action: 'api.v1.ohmyapi.token.list',
+      auth: true,
+      data: {
+        limit: 1
+      }
+    }).then((result) => {
+      if (result['status']) {
+        this.tokens = result.meta!.total ?? 0;
+      }
+    });
   }
 }
