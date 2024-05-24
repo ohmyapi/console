@@ -30,6 +30,12 @@ import { UserService } from '../../../../projects/sdk/src/lib/user.service';
         <strong class="text-3xl">{{ 'card:subtitle-welcome' | i18n: { 'nickname': userService.profile!.nickname } }}</strong>
       </a>
 
+      <a href="https://docs.ohmyapi.com" class="flex flex-nowrap items-center justify-between gap-2 ps-10 pe-7 py-5 sm:col-span-2 rounded-2xl bg-gradient-to-tl from-sky-700 to-sky-500 text-white relative group overflow-hidden transition-all hover:shadow-xl">
+        <strong class="text-2xl">{{ 'card:documention' | i18n }}</strong>
+
+        <i class="material-icons-round transition-all flip">launch</i>
+      </a>
+
       <a routerLink="/-/wallet" class="flex flex-col justify-end gap-2 p-6 rounded-2xl bg-gradient-to-tl from-amber-700 to-amber-500 text-white relative group transition-all hover:shadow-xl">
         <i class="material-icons-round absolute top-6 left-6 transition-all group-hover:scale-125">add</i>
 

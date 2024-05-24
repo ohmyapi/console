@@ -15,6 +15,10 @@
 }
 
 @layer components {
+  [dir="rtl"] .flip {
+    transform: scaleX(-1);
+  }
+
   .h-inherit {
     height: inherit !important;
   }
