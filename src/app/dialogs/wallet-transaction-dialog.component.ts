@@ -46,12 +46,17 @@ import moment from 'jalali-moment';
       
       <div class="flex flex-col gap-1">
         <span class="text-gray-500 text-sm">{{ 'text:wallet-transaction-dialog:balance-after' | i18n }}</span>
+        @if(data['type'] == 'deposit') {
         <strong>{{ data['balance'] + data['value'] }} {{ 'text:ohmycoin' | i18n }}</strong>
+      } @else if(data['type'] == 'consume') {
+        <strong>{{ data['balance'] - data['value'] }} {{ 'text:ohmycoin' | i18n }}</strong>
+      }
       </div>
 
       <div class="flex flex-col gap-1">
         <span class="text-gray-500 text-sm">{{ 'text:wallet-transaction-dialog:price' | i18n }}</span>
-        <strong>{{ data['price'] }} {{ 'server:text:' + data['currency']['currency'] | i18n }}</strong>
+
+          <strong>{{ data['price'] }} {{ 'server:text:' + data['currency']['currency'] | i18n }}</strong>
       </div>
 
       <div></div>

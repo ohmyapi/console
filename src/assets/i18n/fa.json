@@ -59,6 +59,7 @@
     "server:text:wallet-transaction-status-failed": "ناموفق بود",
     "server:text:wallet-transaction-status-pending": "منتظریم",
     "server:text:wallet-transaction-type-deposit": "افزایش",
+    "server:text:wallet-transaction-type-consume": "خرج",
     "text:token-expire-1D": "یه روز",
     "text:token-expire-7D": "یه هفته",
     "text:token-expire-14D": "دو هفته",
@@ -120,5 +121,6 @@
     "button:more-transactions": "تراکنش های بیشتر",
     "button:more-tokens": "توکن های بیشتر",
     "text:update-available": "یه بروزرسانی جدید رسید",
-    "button:update": "بروز کن"
+    "button:update": "بروز کن",
+    "server:text:OHMYCOIN": "اوه کوین"
 }
