@@ -252,7 +252,7 @@ export class DepositDialogComponent {
 
       this.disabled = false;
     } catch (error: any) {
-      if (error?.error?.i18n) {
+      if(error.error) {
         this.toastService.make({
           i18n: error.error['i18n'],
         });
