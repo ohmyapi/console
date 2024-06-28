@@ -1,28 +1,36 @@
 import { DIALOG_DATA, DialogRef } from "@angular/cdk/dialog";
 import { Component, Inject } from "@angular/core";
-import { I18nModule, I18nService } from "../../../projects/i18n/src/public-api";
+import { FormsModule } from "@angular/forms";
 import moment from "jalali-moment";
 import { ApiService } from "../../../projects/api/src/public-api";
+import { I18nModule, I18nService } from "../../../projects/i18n/src/public-api";
 import { ToastService } from "../../../projects/sdk/src/public-api";
 
 @Component({
   selector: "app-token-form-dialog",
   standalone: true,
-  imports: [I18nModule],
+  imports: [I18nModule, FormsModule],
   template: `
-    @if(data == null || data['id'] == null) {
-    <section class="flex flex-col gap-1 p-4 border-b border-base-300">
-      <strong>{{ "dialog:token-form:title" | i18n }}</strong>
+   @if(data) {
+    <div role="tablist" class="border-b-2 flex flex-nowrap items-center">
+      <a (click)="tab = 'token'" [class.border-green-500]="tab == 'token'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
+        {{ 'tab:token' | i18n }}
+      </a>
+      <a (click)="tab = 'name'" [class.border-green-500]="tab == 'name'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
+        {{ 'tab:name' | i18n }}
+      </a>
+      <a (click)="tab = 'permission'" [class.border-green-500]="tab == 'permission'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
+        {{ 'tab:permission' | i18n }}
+      </a>
+      <a (click)="tab = 'limit'" [class.border-green-500]="tab == 'limit'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
+        {{ 'tab:limit' | i18n }}
+      </a>
+      <a (click)="tab = 'delete'" [class.border-green-500]="tab == 'delete'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
+        {{ 'tab:delete' | i18n }}
+      </a>
+    </div>
 
-      @if(!data) {
-      <span class="text-sm text-gray-500">
-        <!-- می خواهید کلیدتون چند وقت کار کنه ؟ -->
-        {{ "dialog:token-form:subtitle" | i18n }}
-      </span>
-      }
-    </section>
-    } @if(data) {
-    <section class="flex flex-col items-center gap-4 p-10">
+    <section class="flex flex-col items-center gap-4 p-10" [class.hidden]="tab != 'token'">
       <label
         dir="ltr"
         class="input input-bordered flex items-center gap-2 w-full focus-within:border-green-500 focus-within:outline-green-500"
@@ -65,43 +73,121 @@ import { ToastService } from "../../../projects/sdk/src/public-api";
         }
       </div>
     </section>
-    } @else {
-    <section class="flex flex-col">
-      @for (item of expires; track $index) {
-      <label
-        class="flex flex-nowrap items-center gap-4 border-b border-base-300 px-2 py-2 last:border-transparent cursor-pointer text-sm transition-all hover:bg-black/10"
-      >
-        <input
-          (change)="selected = item['key']"
-          [disabled]="disabled"
-          type="radio"
-          name="currency"
-          value="{{ item['key'] }}"
-          [checked]="item['key'] == selected"
-          class="radio radio-sm checked:radio-amber-500"
-        />
 
-        <span class="flex-1 font-bold">{{
-          "text:token-expire-" + item['key'] | i18n
-        }}</span>
+    <section class="flex flex-col p-4" [class.hidden]="tab != 'name'">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">{{ 'input:token-name' | i18n }}</span>
+          </label>
 
-        <span class="opacity-60">{{ item['time'] }}</span>
-      </label>
-      }
-    </section>
+          <label class="input input-bordered flex items-center gap-2 focus-within:outline-green-500 focus-within:border-green-500">
+            <input type="text" [(ngModel)]="data['name']" name="ohmyapi-token-name" class="grow placeholder:text-gray-500"/>
+          </label>
+        </div>
+      </section>
+
+      <section class="flex flex-col max-h-128 overflow-y-scroll" [class.hidden]="tab != 'permission'">
+        <div class="flex flex-nowrap items-center gap-2 h-12 px-4 bg-amber-300 m-2 rounded-btn text-sm">
+          <i class="material-icons-round">info_outline</i>
+          <span>{{ 'text:token-form-dialog:permission-support' | i18n }}</span>
+        </div>
+
+        @for (item of permissions; track $index) {
+          <div class="h-12 w-full px-4 border-b flex flex-nowrap items-center gap-2 text-sm">
+            <strong>{{$index + 1}}.</strong>
+            <span>{{ item }}</span>
+          </div>
+        }
+      </section>
+
+      <section class="flex flex-col max-h-128 overflow-y-scroll" [class.hidden]="tab != 'limit'">
+        <div class="collapse collapse-arrow rounded-none border-b">
+          <input type="checkbox" class="peer" />
+          <div class="collapse-title">{{ 'text:token-form-dialog:ip-limit' | i18n }}</div>
+          <div class="collapse-content p-0">
+            <label
+              dir="ltr"
+              class="m-4 input input-bordered flex items-center gap-2 focus-within:border-green-500 focus-within:outline-green-500"
+            >
+              <button
+                (click)="addIP()"
+                class="btn btn-sm btn-square btn-ghost"
+              >
+                <i class="material-icons-round">add</i>
+              </button>
+
+              <input
+                [(ngModel)]="ip"
+                placeholder="8.8.8.8"
+                type="string"
+                name="ohmyapi-token"
+                class="grow placeholder:text-gray-500"
+                (keyup.enter)="addIP()"
+              />
+            </label>
+
+            @for (item of data['ips']; track $index) {
+              <div class="h-12 w-full px-4 border-b flex flex-nowrap items-center gap-2 text-sm">
+                <strong>{{$index + 1}}.</strong>
+                <span class="flex-1">{{ item }}</span>
+
+                <button (click)="data['ips'].splice($index, 1)" class="btn btn-ghost btn-sm text-error">حذف</button>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="collapse collapse-arrow rounded-none border-b">
+          <input type="checkbox" class="peer" />
+          <div class="collapse-title">{{ 'text:token-form-dialog:referer-limit' | i18n }}</div>
+          <div class="collapse-content p-0">
+            <label
+              dir="ltr"
+              class="m-4 input input-bordered flex items-center gap-2 focus-within:border-green-500 focus-within:outline-green-500"
+            >
+              <button
+                (click)="addReferer()"
+                class="btn btn-sm btn-square btn-ghost"
+              >
+                <i class="material-icons-round">add</i>
+              </button>
+
+              <input
+                [(ngModel)]="referer"
+                placeholder="example.com"
+                type="string"
+                name="ohmyapi-referer"
+                class="grow placeholder:text-gray-500"
+                (keyup.enter)="addReferer()"
+              />
+            </label>
+          </div>
+
+          @for (item of data['referers']; track $index) {
+            <div class="h-12 w-full px-4 border-b flex flex-nowrap items-center gap-2 text-sm">
+              <strong>{{$index + 1}}.</strong>
+              <span class="flex-1">{{ item }}</span>
+              <button (click)="data['referers'].splice($index, 1)" class="btn btn-ghost btn-sm text-error">حذف</button>
+            </div>
+          }
+        </div>
+      </section>
+
+      <section class="flex flex-col items-center justify-center p-8" [class.hidden]="tab != 'delete'">
+        <i class="material-icons-round text-error !w-20 !h-20 !text-[5rem]">delete</i>
+
+        <strong class="text-lg mt-4">{{ 'text:token-form-dialog:delete-title' | i18n }}</strong>
+        <p class="text-sm text-gray-600">{{ 'text:token-form-dialog:delete-subtitle' | i18n}}</p>
+
+        <button (click)="delete()" class="btn btn-ghost btn-sm text-error mt-6">
+          {{ "button:token-form-dialog:delete" | i18n }}
+        </button>
+      </section>
     }
 
     <section
       class="flex flex-nowrap items-center justify-end gap-1 p-2 bg-base-200 mt-auto"
     >
-      @if(data && data['id']) {
-      <button (click)="delete()" class="btn btn-ghost text-error">
-        {{ "button:token-form-dialog:delete" | i18n }}
-      </button>
-
-      <div class="flex-1"></div>
-      }
-
       <button
         [disabled]="disabled"
         (click)="close()"
@@ -110,7 +196,6 @@ import { ToastService } from "../../../projects/sdk/src/public-api";
         {{ "button:token-form-dialog:close" | i18n }}
       </button>
 
-      @if(!data) {
       <button
         [disabled]="disabled"
         (click)="submit()"
@@ -118,7 +203,6 @@ import { ToastService } from "../../../projects/sdk/src/public-api";
       >
         {{ "button:token-form-dialog:submit" | i18n }}
       </button>
-      }
     </section>
   `,
   host: {
@@ -127,10 +211,13 @@ import { ToastService } from "../../../projects/sdk/src/public-api";
   },
 })
 export class TokenFormDialogComponent {
-  public expires: any[] = [];
-  public selected: string = "1Y";
-
+  public tab: string = 'token';
   public disabled: boolean = false;
+
+  public permissions: string[] = [];
+
+  public ip: string = '';
+  public referer: string = '';
 
   constructor(
     @Inject(DIALOG_DATA)
@@ -139,23 +226,38 @@ export class TokenFormDialogComponent {
     private i18nService: I18nService,
     private apiService: ApiService,
     private toastService: ToastService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.apiService
-      .call({
-        action: "api.v1.ohmyapi.token.expires",
-        auth: true,
-      })
-      .then((res) => {
-        if (res["status"]) {
-          this.expires = res["data"];
-        }
-      });
+    this.apiService.call({
+      action: 'api.v1.ohmyapi.token.oneById',
+      data: {
+        id: this.data['id']
+      },
+      auth: true,
+    }).then((res) => {
+      this.data = res.data['data'];
+
+      this.permissions = res.data['permissions'];
+    });
   }
 
   public close() {
     this.dialogRef.close();
+  }
+
+  public addIP() {
+    if (this.ip.length != 0) {
+      this.data['ips'].push(this.ip);
+      this.ip = '';
+    }
+  }
+
+  public addReferer() {
+    if (this.referer.length != 0) {
+      this.data['referers'].push(this.referer);
+      this.referer = '';
+    }
   }
 
   public copyToken() {
@@ -172,18 +274,6 @@ export class TokenFormDialogComponent {
         });
       });
   }
-
-  public formatExpire(add: string) {
-    if (add == "FOREEVER") return "";
-    let amount: any = parseInt(add.slice(0, 1));
-    let unit: any = { D: "days", M: "months", Y: "years" }[add.slice(1, 2)];
-
-    return moment()
-      .locale(this.i18nService.languageCurrent!)
-      .add(unit, amount)
-      .format("dddd DD MMMM YYYY");
-  }
-
   public formatAt(value: string) {
     return moment(value)
       .locale(this.i18nService.languageCurrent!)
@@ -193,29 +283,26 @@ export class TokenFormDialogComponent {
   public async submit() {
     this.disabled = true;
 
-    try {
-      const result = await this.apiService.call({
-        action: "api.v1.ohmyapi.token.generate",
-        auth: true,
-        data: {
-          expireAfter: this.selected,
-        },
-      });
-
-      if (result.status) {
-        this.data = {
-          token: result.data["token"],
-          expireAfter: result.data["expireAfter"],
-          expiredAt: result.data["expiredAt"],
-        };
+    this.apiService.call({
+      action: 'api.v1.ohmyapi.token.update',
+      data: {
+        id: this.data['id'],
+        name: this.data['name'],
+        ips: this.data['ips'],
+        referers: this.data['referers'],
+      },
+      auth: true,
+    }).then((res) => {
+      if (res.status) {
+        this.close();
+      } else {
+        this.disabled = false;
       }
 
       this.toastService.make({
-        i18n: result["i18n"],
+        i18n: res["i18n"],
       });
-
-      this.disabled = false;
-    } catch (error: any) {
+    }).catch((error) => {
       if (error.error) {
         this.toastService.make({
           i18n: error.error["i18n"],
@@ -223,7 +310,7 @@ export class TokenFormDialogComponent {
       }
 
       this.disabled = false;
-    }
+    });
   }
 
   public async delete() {

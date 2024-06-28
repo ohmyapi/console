@@ -5,6 +5,7 @@ import { I18nModule, I18nService } from '../../../../projects/i18n/src/public-ap
 import { DialogService } from '../../../../projects/sdk/src/lib/dialog.service';
 import { UserService } from '../../../../projects/sdk/src/lib/user.service';
 import { TokenFormDialogComponent } from '../../dialogs/token-form-dialog.component';
+import { TokenCreateFormDialogComponent } from '../../dialogs/token-create-form-dialog.component';
 
 @Component({
   selector: 'app-token',
@@ -15,7 +16,7 @@ import { TokenFormDialogComponent } from '../../dialogs/token-form-dialog.compon
         <div class="flex flex-col items-center justify-center gap-4 w-full h-128">
           <strong> {{ 'empty:tokens' | i18n }} </strong>
 
-          <button (click)="openTokenFormDialog()" class="btn btn-sm btn-outline border-primary text-primary mt-8">
+          <button (click)="openTokenCreateFormDialog()" class="btn btn-sm btn-outline border-primary text-primary mt-8">
             <span>{{ 'button:create-new-token' | i18n }}</span>
           </button>
         </div>
@@ -24,7 +25,7 @@ import { TokenFormDialogComponent } from '../../dialogs/token-form-dialog.compon
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 w-full rounded-2xl p-6 bg-gradient-to-tl from-green-700 to-green-500 text-white">
             <span>شما {{ userService.tokens }} کلید دارید</span>
 
-            <button (click)="openTokenFormDialog()" class="btn btn-sm btn-outline border-white text-white mt-4 sm:mt-0">
+            <button (click)="openTokenCreateFormDialog()" class="btn btn-sm btn-outline border-white text-white mt-4 sm:mt-0">
               <span>{{ 'button:create-new-token' | i18n }}</span>
             </button>
           </div>
@@ -36,6 +37,7 @@ import { TokenFormDialogComponent } from '../../dialogs/token-form-dialog.compon
               <thead>
                 <tr>
                   <th>#</th>
+                  <th>{{ 'table:head:name' | i18n }}</th>
                   <th>{{ 'table:head:time' | i18n }}</th>
                   <th>{{ 'table:head:token:token' | i18n }}</th>
                   <th>{{ 'table:head:token:expireAfter' | i18n }}</th>
@@ -46,6 +48,7 @@ import { TokenFormDialogComponent } from '../../dialogs/token-form-dialog.compon
                 @for (item of tokens; track $index) {
                   <tr tabindex="0" (click)="openTokenFormDialog(item)" class="hover:bg-base-200 cursor-pointer">
                     <th>{{item.id}}</th>
+                    <td class="whitespace-pre">{{ item.name }}</td>
                     <td class="whitespace-pre">{{ formatAt(item.updatedAt) }}</td>
                     <td class="whitespace-pre">{{ formatToken(item.token) }}</td>
                     <td class="whitespace-pre">{{ 'text:token-expire-' + item.expireAfter | i18n }}</td>
@@ -98,7 +101,12 @@ export class TokenComponent {
     this.fetch();
   }
 
-  public openTokenFormDialog(data: any = undefined) {
+  public openTokenCreateFormDialog() {
+    this.dialogService.open(TokenCreateFormDialogComponent, {
+    }).closed.subscribe(() => this.fetch());
+  }
+
+  public openTokenFormDialog(data: any) {
     this.dialogService.open(TokenFormDialogComponent, {
       data,
     }).closed.subscribe(() => this.fetch());
@@ -109,7 +117,7 @@ export class TokenComponent {
   }
 
   public formatToken(token: string) {
-    return token.slice(0, 4) + '***.*******.***' + token.slice(token.length - 4, token.length);
+    return token.slice(0, 4) + '**.*****.**' + token.slice(token.length - 4, token.length);
   }
 
   public next() {
