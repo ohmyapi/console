@@ -213,7 +213,7 @@ export class ProfileComponent {
         this.password.disabled = false;
 
         if (result['status']) {
-          this.userService.whoami();
+          this.userService.loadProfile();
         }
 
         this.toastSerivce.make({

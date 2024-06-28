@@ -68,6 +68,6 @@ export class WalletCallbackComponent {
   }
 
   public refresh() {
-    this.userSerivce.whoami();
+    this.userSerivce.loadWallet();
   }
 }

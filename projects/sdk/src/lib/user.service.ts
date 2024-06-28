@@ -18,12 +18,25 @@ export class UserService {
     private apiService: ApiService
   ) { }
 
-  public whoami() {
-    return Promise.all([
-      this.loadProfile(),
-      this.loadWallet(),
-      this.loadTokens(),
-    ])
+  public async whoami() {
+    try {
+      const result = await this.apiService.call({
+        action: 'api.v1.ohmyapi.user.hello',
+        auth: true
+      });
+
+      this.profile = result.data['profile'];
+      this.wallet = result.data['wallet'];
+      this.tokens = result.data['tokens'];
+
+      return [
+        this.profile,
+        this.wallet,
+        this.tokens
+      ];
+    } catch (error) {
+      return null;
+    }
   }
 
   public logout() {
