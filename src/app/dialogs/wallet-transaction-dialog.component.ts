@@ -31,7 +31,7 @@ import moment from 'jalali-moment';
     <section class="grid grid-cols-2 gap-4 p-4">
       <div class="flex flex-col gap-1">
         <span class="text-gray-500 text-sm">{{ 'text:wallet-transaction-dialog:amount' | i18n }}</span>
-        <strong>{{ data['amount'] }} {{ 'server:text:' + data['currency']['currency'] | i18n }}</strong>
+        <strong>{{ data['amount'] }} {{ data['currency']['symbol'] }}</strong>
       </div>
 
       <div class="flex flex-col gap-1">
@@ -56,7 +56,7 @@ import moment from 'jalali-moment';
       <div class="flex flex-col gap-1">
         <span class="text-gray-500 text-sm">{{ 'text:wallet-transaction-dialog:price' | i18n }}</span>
 
-          <strong>{{ data['price'] }} {{ 'server:text:' + data['currency']['currency'] | i18n }}</strong>
+          <strong>{{ data['price'] }} {{ data['currency']['symbol'] }}</strong>
       </div>
 
       <div></div>

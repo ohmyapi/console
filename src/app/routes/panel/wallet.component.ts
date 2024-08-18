@@ -87,7 +87,7 @@ import { WalletTransactionDialogComponent } from '../../dialogs/wallet-transacti
 })
 export class WalletComponent {
   public get balance(): string {
-    return Number(this.userService.wallet!.balance).toLocaleString('en');
+    return this.userService.wallet!.balance.toString();
   }
 
   public page: number = 1;

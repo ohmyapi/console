@@ -103,13 +103,17 @@ export class TokenComponent {
 
   public openTokenCreateFormDialog() {
     this.dialogService.open(TokenCreateFormDialogComponent, {
-    }).closed.subscribe(() => this.fetch());
+    }).closed.subscribe(() => {
+      this.page = 1; this.fetch();
+    });
   }
 
   public openTokenFormDialog(data: any) {
     this.dialogService.open(TokenFormDialogComponent, {
       data,
-    }).closed.subscribe(() => this.fetch());
+    }).closed.subscribe(() => {
+      this.page = 1; this.fetch();
+    });
   }
 
   public formatAt(value: string) {

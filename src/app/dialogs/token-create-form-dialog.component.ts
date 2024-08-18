@@ -62,6 +62,52 @@ import { ToastService } from '../../../projects/sdk/src/public-api';
       </section>
     }
 
+    @if(step == 'token') {
+      <section class="flex flex-col items-center gap-4 p-10">
+        <label
+          dir="ltr"
+          class="input input-bordered flex items-center gap-2 w-full focus-within:border-green-500 focus-within:outline-green-500"
+        >
+          <button
+            (click)="copyToken()"
+            class="btn btn-sm btn-square btn-ghost tooltip tooltip-bottom"
+            [attr.data-tip]="'text:token-form-dialog:copy-to-clipboard' | i18n"
+          >
+            <i class="material-icons-round">content_copy</i>
+          </button>
+
+          <input
+            readonly
+            type="string"
+            [value]="token"
+            name="ohmyapi-token"
+            placeholder="{{ 'input:token' | i18n }}"
+            class="grow placeholder:text-gray-500"
+          />
+        </label>
+
+        <div class="grid sm:grid-cols-2 gap-10 sm:gap-4 w-full p-4">
+          <div class="flex flex-col gap-1">
+            <span class="text-gray-500 text-sm">{{
+              "text:token-form-dialog:time" | i18n
+            }}</span>
+            <strong>{{
+              "text:token-expire-" + selected | i18n
+            }}</strong>
+          </div>
+
+          @if(selected != 'FOREVER') {
+            <div class="flex flex-col gap-1">
+              <span class="text-gray-500 text-sm">{{
+                "text:token-form-dialog:expiredAt" | i18n
+              }}</span>
+              <strong>{{ formatAt(selected) }}</strong>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
     <section
       class="flex flex-nowrap items-center justify-end gap-1 p-2 bg-base-200 mt-auto"
     >
@@ -73,13 +119,15 @@ import { ToastService } from '../../../projects/sdk/src/public-api';
         {{ "button:token-form-dialog:close" | i18n }}
       </button>
 
-      <button
-        [disabled]="disabled"
-        (click)="submit()"
-        class="btn bg-green-500 hover:bg-green-600 hover:text-white"
-      >
-        {{ "button:token-form-dialog:submit" | i18n }}
-      </button>
+      @if(step != 'token') {
+        <button
+          [disabled]="disabled"
+          (click)="submit()"
+          class="btn bg-green-500 hover:bg-green-600 hover:text-white"
+          >
+          {{ "button:token-form-dialog:submit" | i18n }}
+        </button>
+    }
       
     </section>
   `,
@@ -170,6 +218,7 @@ export class TokenCreateFormDialogComponent {
           action: "api.v1.ohmyapi.token.generate",
           auth: true,
           data: {
+            name: this.name,
             expireAfter: this.selected,
           },
         });

@@ -13,19 +13,19 @@ import { ToastService } from "../../../projects/sdk/src/public-api";
   template: `
    @if(data) {
     <div role="tablist" class="border-b-2 flex flex-nowrap items-center">
-      <a (click)="tab = 'token'" [class.border-green-500]="tab == 'token'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
+      <a tabindex="0" (click)="tab = 'token'" [class.border-green-500]="tab == 'token'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
         {{ 'tab:token' | i18n }}
       </a>
-      <a (click)="tab = 'name'" [class.border-green-500]="tab == 'name'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
+      <a tabindex="0" (click)="tab = 'name'" [class.border-green-500]="tab == 'name'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
         {{ 'tab:name' | i18n }}
       </a>
-      <a (click)="tab = 'permission'" [class.border-green-500]="tab == 'permission'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
+      <a tabindex="0" (click)="tab = 'permission'" [class.border-green-500]="tab == 'permission'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
         {{ 'tab:permission' | i18n }}
       </a>
-      <a (click)="tab = 'limit'" [class.border-green-500]="tab == 'limit'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
+      <a tabindex="0" (click)="tab = 'limit'" [class.border-green-500]="tab == 'limit'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
         {{ 'tab:limit' | i18n }}
       </a>
-      <a (click)="tab = 'delete'" [class.border-green-500]="tab == 'delete'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
+      <a tabindex="0" (click)="tab = 'delete'" [class.border-green-500]="tab == 'delete'" role="tab" class="-mb-[2px] flex items-center justify-center border-b-2 px-4 h-12 w-fit cursor-pointer text-sm text-gray-600">
         {{ 'tab:delete' | i18n }}
       </a>
     </div>
@@ -101,6 +101,10 @@ import { ToastService } from "../../../projects/sdk/src/public-api";
       </section>
 
       <section class="flex flex-col max-h-128 overflow-y-scroll" [class.hidden]="tab != 'limit'">
+        <div class="bg-base-200 p-4 text-sm">
+          {{ 'text:token-form-dialog:limit-description' | i18n }}
+        </div>
+
         <div class="collapse collapse-arrow rounded-none border-b">
           <input type="checkbox" class="peer" />
           <div class="collapse-title">{{ 'text:token-form-dialog:ip-limit' | i18n }}</div>
